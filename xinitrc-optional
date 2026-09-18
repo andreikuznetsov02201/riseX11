@@ -1,1 +1,20 @@
-/home/mrxsloopy/.xinitrc
+#!/bin/sh
+export LC_TIME=C
+
+xset s off
+xset s noblank
+xset -dpms
+
+#pipewire &
+gentoo-pipewire-launcher &
+xinput set-prop "BLTP7840:00 347D:7840 Touchpad" "libinput Tapping Enabled" 1
+setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
+feh --bg-fill --randomize ~/Pictures/Wallpapers/* &
+picom --backend glx --vsync &
+while xsetroot -name "`date +'%H:%M:%S'` `uptime | sed 's/.*,//'`" ; do
+    sleep 1
+done &
+export XLIB_SKIP_ARGB_VISUAL=0
+export _JAVA_AWT_WM_NONREPARENTING=1
+#/usr/bin/kitty -e sh -lc 'echo KITTY_FROM_X; sleep 2; exit' &
+exec vxwm
